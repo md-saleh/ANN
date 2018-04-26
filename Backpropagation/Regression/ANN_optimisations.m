@@ -19,22 +19,12 @@ Theta1 = rand(hidden_layer_size, input_layer_size + 1) * 2 * epsilon - epsilon; 
 epsilon = sqrt(6)/(sqrt( 1 + 26));
 Theta2 = rand(output_layer_size, hidden_layer_size + 1)* 2 * epsilon - epsilon; % 1  x 26
 
-%load('weights.mat');
-
 nn_weights = [Theta1(:) ; Theta2(:)];
 
 %feed forward and back propagation
 lambda = 0; %weight regulization
 
 [J grad] = nnCostFun(nn_weights, input_layer_size, hidden_layer_size, output_layer_size, X, out, lambda);
-
-%gradient descent
-
-%options = optimset('MaxIter', 50);
-
-%costFunction = @(p) nnCostFun(p, input_layer_size, hidden_layer_size, output_layer_size, X, out, lambda);
-                                   
-%[nn_params, cost] = fmincg(costFunction, nn_weights, options);
 
 [nn_params, cost] = gradientDescent(X, out, nn_weights, grad, 0.9, 500);
 
